@@ -1,24 +1,25 @@
 package com.bennieslab.portfolio.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;;
-
 @Entity
-public class Project {
+@Table(name = "blog_post")
+public class Post {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
+    private String title;
+    private String content;
     private String category;
     @Column(name = "date_posted")
     private LocalDateTime datePosted;
     @Column(name = "last_updated")
     private LocalDateTime lastUpdated;
 
-    public Project() {}
+    public Post() {}
 
     public Long getId() {
         return id;
@@ -28,20 +29,20 @@ public class Project {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getContent() {
+        return content;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getCategory() {
