@@ -1,12 +1,12 @@
 package com.bennieslab.portfolio.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;;
-
 @Entity
-public class Project {
-    
+public class Skill {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,7 +18,7 @@ public class Project {
     @Column(name = "last_updated")
     private LocalDateTime lastUpdated;
 
-    public Project() {}
+    public Skill() {}
 
     public Long getId() {
         return id;

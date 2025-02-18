@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bennieslab.portfolio.model.Project;
-import com.bennieslab.portfolio.service.ProjectService;
+import com.bennieslab.portfolio.model.Skill;
+import com.bennieslab.portfolio.service.SkillService;
 
 @CrossOrigin(origins = "http://localhost:5500")@RestController
-@RequestMapping("/projects")
-public class ProjectController {
+@RequestMapping("/skills")
+public class SkillController {
     
     @Autowired
-    private ProjectService projectService;
+    private SkillService skillService;
 
     @GetMapping("/{id}")
-    public Optional<Project> getprojectById(@PathVariable Long id) {
-        return projectService.getProjectById(id);
+    public Optional<Skill> getSkillById(@PathVariable Long id) {
+        return skillService.getSkillById(id);
     }
 
     @GetMapping
-    public List<Project> getAllprojects() {
-        return projectService.getAllProjects();
+    public List<Skill> getAllSkills() {
+        return skillService.getAllSkills();
     }
 
     @PostMapping
-    public Project createproject(@RequestBody Project project) {
-        return projectService.addProject(project);
+    public Skill createSkill(@RequestBody Skill skill) {
+        return skillService.addSkill(skill);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteproject(@PathVariable Long id) {
-        projectService.deleteProject(id);
-        return "project deleted successfully";
+    public String deleteSkill(@PathVariable Long id) {
+        skillService.deleteSkill(id);
+        return "skill deleted successfully";
     }
 }
