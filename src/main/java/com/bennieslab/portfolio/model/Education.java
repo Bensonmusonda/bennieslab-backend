@@ -24,7 +24,7 @@ public class Education {
     @Column(name = "date_ended")
     private LocalDate dateEnded;
 
-    @Column(name = "currently_here", nullable = false)
+    @Column(name = "currently_here", nullable = false, insertable = false, updatable = false)
     private Boolean currentlyHere;
 
     @PrePersist
@@ -33,7 +33,6 @@ public class Education {
         this.currentlyHere = (this.dateEnded == null);
     }
 
-    // Getters and setters
     public Long getId() {
         return id;
     }

@@ -20,7 +20,6 @@ public class Certificate {
 
     public Certificate() {}
 
-    // Getters and setters
     public Long getId() {
         return id;
     }

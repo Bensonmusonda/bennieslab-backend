@@ -27,7 +27,6 @@ public class Stickie {
         this.dateStuck = Instant.now();
     }
 
-    // Getters and setters
     public Long getId() {
         return id;
     }

@@ -1,46 +1,28 @@
 package com.bennieslab.portfolio.controller;
 
-
+import com.bennieslab.portfolio.model.UserPublicDto;
 import com.bennieslab.portfolio.service.UserService;
-import com.bennieslab.portfolio.model.User;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:5500")
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/v1/users")
 public class UserController {
-    
-    @Autowired
-    private UserService userService;
 
-    @GetMapping("/{id}")
-    public Optional<User> getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+    private final UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/email/{email}")
-    public Optional<User> getUserByEmail(@PathVariable String email) {
-        return userService.getUserByEmail(email);
-    }
-
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
-    }
-
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
-    }
-
-    @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-        return "user deleted successfully";
+    public ResponseEntity<UserPublicDto> getUserByEmail(@PathVariable String email) {
+        Optional<UserPublicDto> userDtoOptional = userService.getUserByEmail(email);
+        return userDtoOptional.map(userPublicDto -> ResponseEntity.ok().body(userPublicDto))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

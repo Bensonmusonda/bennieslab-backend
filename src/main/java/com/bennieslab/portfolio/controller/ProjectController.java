@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bennieslab.portfolio.model.Project;
+import com.bennieslab.portfolio.repository.mini.ProjectMini;
 import com.bennieslab.portfolio.service.ProjectService;
 
 @CrossOrigin(origins = "http://localhost:5500")@RestController
@@ -31,6 +32,11 @@ public class ProjectController {
     @GetMapping
     public List<Project> getAllprojects() {
         return projectService.getAllProjects();
+    }
+
+    @GetMapping("/names")
+    public List<ProjectMini> getAllProjectNames() {
+        return projectService.getAllProjectNames();
     }
 
     @PostMapping

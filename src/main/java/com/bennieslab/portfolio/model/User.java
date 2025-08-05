@@ -1,25 +1,45 @@
 package com.bennieslab.portfolio.model;
 
+import com.bennieslab.portfolio.model.enums.Role;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "_user")
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "first_name")
     private String firstName;
+    
     @Column(name = "last_name")
     private String lastName;
-    private String career;
-    private String email;
-    private String location;
-    private String authority;
-    private String passwordHash;
 
-    public User() {};
+    private String career;
+
+    private String email;
+    
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    private String location;
+
+    @Column(name = "created_at")
+    private Timestamp createdAt;
+
+    public User() {
+    }
 
     public Long getId() {
         return id;
@@ -61,12 +81,20 @@ public class User {
         this.email = email;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getLocation() {
@@ -77,11 +105,41 @@ public class User {
         this.location = location;
     }
 
-    public String getAuthority() {
-        return authority;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setAuthority(String authority) {
-        this.authority = authority;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+    
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

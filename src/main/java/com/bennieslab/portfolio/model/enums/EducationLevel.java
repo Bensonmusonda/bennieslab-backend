@@ -1,7 +1,11 @@
 package com.bennieslab.portfolio.model.enums;
 
 public enum EducationLevel {
-    High_School,
-    Undergraduate,
-    Postgraduate
+    HIGH_SCHOOL,
+    ASSOCIATE,
+    DIPLOMA,
+    BACHELOR,
+    MASTER,
+    PHD,
+    OTHER
 }

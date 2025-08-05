@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bennieslab.portfolio.model.Project;
 import com.bennieslab.portfolio.repository.ProjectRepository;
+import com.bennieslab.portfolio.repository.mini.ProjectMini;
 
 @Service
 public class ProjectService {
@@ -20,6 +21,10 @@ public class ProjectService {
 
     public List<Project> getAllProjects() {
         return projectRepository.findAll();
+    }
+
+    public List<ProjectMini> getAllProjectNames() {
+        return projectRepository.findAllProjectMini();
     }
 
     public Project addProject(Project project) {
